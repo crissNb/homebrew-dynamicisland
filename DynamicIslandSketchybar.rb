@@ -6,9 +6,6 @@ class Dynamicislandsketchybar < Formula
 
   depends_on "sketchybar"
   depends_on "jq"
-  depends_on "cava" => :recommended
-  depends_on "sf-symbols" => :cask
-  depends_on "background-music" => :cask
 
   def install
     # Create symlink for sketchybar
