@@ -8,14 +8,23 @@ class Dynamicislandsketchybar < Formula
   depends_on "jq"
 
   def install
-    # Create symlink for sketchybar
-    sketchybar_bin = Utils.safe_popen_read("which", "sketchybar").chomp
-    system "ln", "-sf", sketchybar_bin, "#{HOMEBREW_PREFIX}/bin/dynamic-island-sketchybar"
-
     # Create config directory and install files
-    config_dir = "#{ENV["HOME"]}/.config/dynamic-island-sketchybar"
-    system "mkdir", "-p", config_dir
-    system "cp", "-r", ".", config_dir
+    # real_home = ENV.fetch("HOMEBREW_HOME", Dir.home)
+    # config_dir = "#{real_home}/.config/dynamic-island-sketchybar"
+    # puts "Creating config directory at #{config_dir}"
+    # mkdir_p config_dir
+    # cp_r "helper", config_dir
+    # cp_r "scripts", config_dir
+    # cp_r "userconfigs", config_dir
+    # cp "helper.sh", config_dir
+    # cp "item.sh", config_dir
+    # cp "listener.sh", config_dir
+    # cp "process.sh", config_dir
+    # cp "sketchybarrc", config_dir
+
+    # Create symlink in the formula's bin directory
+    sketchybar_path = Utils.safe_popen_read("which", "sketchybar").chomp
+    bin.install_symlink sketchybar_path => "dynamic-island-sketchybar"
   end
 
   def caveats
