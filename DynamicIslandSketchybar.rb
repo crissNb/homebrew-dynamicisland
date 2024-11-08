@@ -1,8 +1,8 @@
 class Dynamicislandsketchybar < Formula
   desc "Dynamic Island on iPhone 14 Pro implementation on Mac using Sketchybar"
   homepage "https://github.com/crissNb/Dynamic-Island-Sketchybar"
-  url "https://github.com/crissNb/Dynamic-Island-Sketchybar/archive/refs/tags/alpha-01.tar.gz"
-  sha256 "8844e22b3b999574594925ec0a2128d0157aa90385a0d6f2841436d1225a256f"
+  url "https://github.com/crissNb/Dynamic-Island-Sketchybar/archive/refs/tags/alpha-02.tar.gz"
+  sha256 "3a325f41918fb9e8bf9758914aa48ac7591079a9caeded4112f4225f9d36290f"
 
   depends_on "sketchybar"
   depends_on "jq"
