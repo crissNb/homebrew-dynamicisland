@@ -45,7 +45,7 @@ class Dynamicislandsketchybar < Formula
       mkdir -p ~/.config/dynamic-island-sketchybar
 
       Then you can run the dynamic island using:
-      dynamic-island-sketchybar
+      dynamic-island
     EOS
   end
 
