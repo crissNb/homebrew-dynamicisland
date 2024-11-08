@@ -30,7 +30,7 @@ class Dynamicislandsketchybar < Formula
     # Create symlink for sketchybarrc with ALWAYS parameter
     (bin/"dynamic-island-sketchybar").write <<~EOS
       #!/bin/bash
-      dynamic-island-sketchybar-raw -c #{etc}/sketchybarrc
+      dynamic-island-sketchybar-raw -c #{etc}/dynamic-island-sketchybar/sketchybarrc
     EOS
   end
 
