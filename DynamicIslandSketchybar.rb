@@ -10,9 +10,6 @@ class Dynamicislandsketchybar < Formula
   def install
     # Create the necessary directories in /etc
     (etc/"dynamic-island-sketchybar").mkpath
-    (etc/"dynamic-island-sketchybar/scripts").mkpath
-    (etc/"dynamic-island-sketchybar/helper").mkpath
-    (etc/"dynamic-island-sketchybar/userconfigs").mkpath
 
     # Install the files in the /etc/dynamic-island-sketchybar directory
     (etc/"dynamic-island-sketchybar").install "helper.sh"
@@ -20,9 +17,9 @@ class Dynamicislandsketchybar < Formula
     (etc/"dynamic-island-sketchybar").install "listener.sh"
     (etc/"dynamic-island-sketchybar").install "process.sh"
     (etc/"dynamic-island-sketchybar").install "sketchybarrc"
-    (etc/"dynamic-island-sketchybar/scripts").install "scripts"
-    (etc/"dynamic-island-sketchybar/helper").install "helper"
-    (etc/"dynamic-island-sketchybar/userconfigs").install "userconfigs"
+    (etc/"dynamic-island-sketchybar").install "scripts"
+    (etc/"dynamic-island-sketchybar").install "helper"
+    (etc/"dynamic-island-sketchybar").install "userconfigs"
 
     sketchybar_path = Utils.safe_popen_read("which", "sketchybar").chomp
     bin.install_symlink sketchybar_path => "dynamic-island-sketchybar-raw"
@@ -41,7 +38,7 @@ class Dynamicislandsketchybar < Formula
       Copy an appropriate userconfig file for your machine to userconfig.sh.
       For example, for 2021 MacBook Pro 14 Inch:
       
-      cp #{etc}/userconfigs/mbp2021_14.sh ~/.config/dynamic-island-sketchybar/userconfig.sh
+      cp #{etc}/dynamic-island-sketchybar/userconfigs/mbp2021_14.sh ~/.config/dynamic-island-sketchybar/userconfig.sh
 
       If the directory does not exist, create it first with:
 
