@@ -22,12 +22,12 @@ class Dynamicislandsketchybar < Formula
     (etc/"dynamic-island-sketchybar").install "userconfigs"
 
     sketchybar_path = Utils.safe_popen_read("which", "sketchybar").chomp
-    bin.install_symlink sketchybar_path => "dynamic-island-sketchybar-raw"
+    bin.install_symlink sketchybar_path => "dynamic-island-sketchybar"
 
     # Create symlink for sketchybarrc with ALWAYS parameter
-    (bin/"dynamic-island-sketchybar").write <<~EOS
+    (bin/"dynamic-island").write <<~EOS
       #!/bin/bash
-      dynamic-island-sketchybar-raw -c #{etc}/dynamic-island-sketchybar/sketchybarrc
+      dynamic-island-sketchybar -c #{etc}/dynamic-island-sketchybar/sketchybarrc
     EOS
   end
 
