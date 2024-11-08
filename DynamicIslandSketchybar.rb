@@ -8,23 +8,30 @@ class Dynamicislandsketchybar < Formula
   depends_on "jq"
 
   def install
-    # Create config directory and install files
-    # real_home = ENV.fetch("HOMEBREW_HOME", Dir.home)
-    # config_dir = "#{real_home}/.config/dynamic-island-sketchybar"
-    # puts "Creating config directory at #{config_dir}"
-    # mkdir_p config_dir
-    # cp_r "helper", config_dir
-    # cp_r "scripts", config_dir
-    # cp_r "userconfigs", config_dir
-    # cp "helper.sh", config_dir
-    # cp "item.sh", config_dir
-    # cp "listener.sh", config_dir
-    # cp "process.sh", config_dir
-    # cp "sketchybarrc", config_dir
+    # Create the necessary directories in /etc
+    (etc/"dynamic-island-sketchybar").mkpath
+    (etc/"dynamic-island-sketchybar/scripts").mkpath
+    (etc/"dynamic-island-sketchybar/helper").mkpath
+    (etc/"dynamic-island-sketchybar/userconfigs").mkpath
 
-    # Create symlink in the formula's bin directory
+    # Install the files in the /etc/dynamic-island-sketchybar directory
+    (etc/"dynamic-island-sketchybar").install "helper.sh"
+    (etc/"dynamic-island-sketchybar").install "item.sh"
+    (etc/"dynamic-island-sketchybar").install "listener.sh"
+    (etc/"dynamic-island-sketchybar").install "process.sh"
+    (etc/"dynamic-island-sketchybar").install "sketchybarrc"
+    (etc/"dynamic-island-sketchybar/scripts").install "scripts"
+    (etc/"dynamic-island-sketchybar/helper").install "helper"
+    (etc/"dynamic-island-sketchybar/userconfigs").install "userconfigs"
+
     sketchybar_path = Utils.safe_popen_read("which", "sketchybar").chomp
-    bin.install_symlink sketchybar_path => "dynamic-island-sketchybar"
+    bin.install_symlink sketchybar_path => "dynamic-island-sketchybar-raw"
+
+    # Create symlink for sketchybarrc with ALWAYS parameter
+    (bin/"dynamic-island-sketchybar").write <<~EOS
+      #!/bin/bash
+      dynamic-island-sketchybar-raw -c #{etc}/sketchybarrc
+    EOS
   end
 
   def caveats
@@ -34,7 +41,11 @@ class Dynamicislandsketchybar < Formula
       Copy an appropriate userconfig file for your machine to userconfig.sh.
       For example, for 2021 MacBook Pro 14 Inch:
       
-      cp ~/.config/dynamic-island-sketchybar/userconfigs/mbp2021_14.sh ~/.config/dynamic-island-sketchybar/userconfig.sh
+      cp #{etc}/userconfigs/mbp2021_14.sh ~/.config/dynamic-island-sketchybar/userconfig.sh
+
+      If the directory does not exist, create it first with:
+
+      mkdir -p ~/.config/dynamic-island-sketchybar
 
       Then you can run the dynamic island using:
       dynamic-island-sketchybar
